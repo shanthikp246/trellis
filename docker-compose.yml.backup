@@ -1,9 +1,6 @@
 services:
   web:
-    build: 
-      context: ./project
-      dockerfile: Dockerfile.fastapi
-    container_name: fastapi
+    build: ./project
     ports:
       - "8000:8000"
     command: uvicorn main:app --host 0.0.0.0 --reload
@@ -14,16 +11,12 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
   
   worker:
-    build: 
-      context: ./project
-      dockerfile: Dockerfile.celery
-    container_name: celery
+    build: ./project
     command: celery -A worker.celery_app worker --loglevel=info
     volumes:
       - ./project:/app

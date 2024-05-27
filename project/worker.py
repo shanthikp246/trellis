@@ -32,7 +32,6 @@ def do_work(matrix1 , matrix2):
         nrowsB = len(matrix2)
         job_name = os.environ["WORKER_NAME"]
         logging.info(f'Starting task with payload: {nrowsA=}, {nrowsB=}')
-        # Perform your task logic here
         A = np.array(matrix1)
         B = np.array(matrix2)
         C = np.dot(A, B)

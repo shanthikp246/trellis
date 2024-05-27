@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery
+  template:
+    metadata:
+      labels:
+        app: celery
+    spec:
+      containers:
+      - name: celery
+        image: celery:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: celery-service
+spec:
+  selector:
+    app: celery
+  ports:
+  - protocol: TCP
+    port: 5555
+    targetPort: 5555

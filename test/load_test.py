@@ -8,7 +8,9 @@ matrix1 = np.random.rand(matrix_size, matrix_size).tolist()
 matrix2 = np.random.rand(matrix_size, matrix_size).tolist()
 
 # Endpoint URL
-url = "http://localhost:8000/tasks"
+url = "http://localhost:8080/tasks"
+
+print(matrix1)
 
 # Define the payload
 payload = {
@@ -21,5 +23,5 @@ num_requests = 1
 for _ in range(num_requests):
     response = requests.post(url, json=payload)
     print(response.status_code)
-    print(response.json())  # Print the response for debugging
+    # print(response.json())  # Print the response for debugging
 

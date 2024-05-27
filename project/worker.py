@@ -11,8 +11,8 @@ from model import Matrix
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load broker and backend URLs from environment variables
-broker_url = os.environ.get('CELERY_BROKER_URL', 'amqp://guest:guest@rabbitmq:5672//')
-backend_url = os.environ.get('CELERY_BACKEND_URL', 'rpc://')
+broker_url = os.environ.get('CELERY_BROKER_URL', 'amqp://guest:guest@rabbitmq-service:5672//')
+backend_url = os.environ.get('CELERY_RESULT_BACKEND', 'rpc://')
 
 celery_app = Celery('worker', broker=broker_url, backend=backend_url)
 
@@ -35,6 +35,7 @@ def do_work(matrix1 , matrix2):
         A = np.array(matrix1)
         B = np.array(matrix2)
         C = np.dot(A, B)
+
         c.inc()
         
         push_to_gateway("http://pushgateway:9091", job=job_name, registry=registry)

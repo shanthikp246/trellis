@@ -3,7 +3,7 @@ import json
 import numpy as np
 
 # Generate large matrices
-matrix_size = 10
+matrix_size = 10000
 matrix1 = np.random.rand(matrix_size, matrix_size).tolist()
 matrix2 = np.random.rand(matrix_size, matrix_size).tolist()
 

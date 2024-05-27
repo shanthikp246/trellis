@@ -15,15 +15,10 @@ spec:
       containers:
       - name: celery
         image: celery:latest
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: celery-service
-spec:
-  selector:
-    app: celery
-  ports:
-  - protocol: TCP
-    port: 5555
-    targetPort: 5555
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CELERY_BROKER_URL
+          value: "amqp://guest:guest@rabbitmq:5672//"
+        - name: CELERY_RESULT_BACKEND
+          value: "rpc://"
+

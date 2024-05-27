@@ -15,18 +15,10 @@ spec:
       containers:
       - name: fastapi
         image: fastapi:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: fastapi-service
-spec:
-  selector:
-    app: fastapi
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
-  type: LoadBalancer
+        env:
+        - name: CELERY_BROKER_URL
+          value: "amqp://guest:guest@rabbitmq:5672//"
+

@@ -15,7 +15,7 @@ spec:
       containers:
       - name: celery
         image: celery:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         env:
         - name: CELERY_BROKER_URL
           value: "amqp://guest:guest@rabbitmq-service:5672//"

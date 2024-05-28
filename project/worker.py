@@ -38,7 +38,7 @@ def do_work(matrix1 , matrix2):
 
         c.inc()
         
-        push_to_gateway("http://pushgateway:9091", job=job_name, registry=registry)
+        push_to_gateway("http://pushgateway-service:9091", job=job_name, registry=registry)
         logging.info(f'Task completed with payload: {job_name}')
         return {"result": C.tolist()}
     

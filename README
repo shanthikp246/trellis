@@ -9,7 +9,9 @@ This skeleton code uses the following frameworks
 1. minikube start
 
 2. eval $(minikube -p minikube docker-env)
-- This is import. All docker commands will use the minikube docker instance instead of host instance
+- ** This is important. **
+- All docker commands will use the minikube docker instance instead of host instance
+- Otherwise the deployment will fail saying it cannot find the images
 
 3. docker build -t celery:latest -f Dockerfile.celery .
 
@@ -39,6 +41,7 @@ This skeleton code uses the following frameworks
 - kubectl get services
 - kubectl get deployments
 - kubectl get hpa 
+- kubectl patch svc pushgateway-service -p '{"spec": {"type": "LoadBalancer"}}'
 - kubectl replace -f k8s/deployment-fastapi.yaml if you change any of k8s config
 - kubectl logs <pod-name> # get pods names from kubectl get pods
 - kubectl describe pod <pod-name>

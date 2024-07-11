@@ -3,8 +3,8 @@ This skeleton code uses the following frameworks
 - celery/rabbitmq for task queue management
 - prometheus for metrics collection
 - grafana for metric dashboard
-- pushgateway for pushing metrics to prometheus
-- docker/k8s for deployment
+- pushgateway for celery workers to publish metrics which are later scraped by prometheus
+- docker/k8s for deployment and autoscaling
 
 0: Code
 - project/main.py defines the two api endpoints (POST /tasks and GET /tasks/{task_id})
@@ -17,8 +17,9 @@ This skeleton code uses the following frameworks
 
 2. eval $(minikube -p minikube docker-env)
 - ** This is important. **
-- All docker commands will use the minikube docker instance instead of host instance
-- Otherwise the deployment will fail saying it cannot find the images
+- All docker commands will use the minikube docker instance instead of host instance after this command.
+- If you build the docker images below before doing this command the images will end up in the host registry
+- instead of minikube image repository. The deployment will fail saying it can't find the images
 
 3. docker build -t celery:latest -f Dockerfile.celery .
 

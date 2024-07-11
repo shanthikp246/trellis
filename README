@@ -6,6 +6,13 @@ This skeleton code uses the following frameworks
 - pushgateway for pushing metrics to prometheus
 - docker/k8s for deployment
 
+0: Code
+- project/main.py defines the two api endpoints (POST /tasks and GET /tasks/{task_id})
+- project/worker.py simulates a long running background task by doing a matrix multiplication of two matrices A & B that
+  are provided as payload during the POST to /tasks
+- test/load_test.py repeatedly calls the endpoints with random matrices
+
+
 1. minikube start
 
 2. eval $(minikube -p minikube docker-env)
